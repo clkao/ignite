@@ -1,5 +1,5 @@
 # Declare app level module which depends on filters, and services
-#PDFJS.workerSrc = '/pdf.worker.js'
+PDFJS.workerSrc = '/pdf.worker.js'
 
 angular.module "App" <[app.templates ngMaterial ui.router pdf]>
 

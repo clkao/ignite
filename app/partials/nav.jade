@@ -1,12 +1,9 @@
-md-toolbar.md-default-theme
-  .md-toolbar-tools(md-scroll-shrink)
-    h2
-      a.left.floated.item.header.brand(href='/') Angular/LiveScript
-      a.right.floated.item.branding(href='http://livescript.net', target='_blank')
-        img(src='http://livescript.net/images/icon.png')
-    h3.md-toolbar-item
-      a.item(ng-href='/', ng-class="{active:activeTab == ''}") Home
-    span.menu-separator-icon
-    h3.right.floated.menu.md-toolbar-item
-      a.item.about(ng-href="/about", ng-class="{active:activeTab == 'about'}") 關於
-    a.ui.top.right.attached.label.build-id(href="http://github.com/clkao/angular-livescript-seed") {{ config_build }}
+md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked-open="!hasPDF")
+  md-toolbar.md-theme-indigo
+    h1.md-toolbar-tools Ignite Talks
+    md-content.md-padding(ng-controller='LeftCtrl')
+      md-button.md-primary(ng-click='close()', hide-gt-md='') Close
+      md-button.md-primary(ng-click="dropbox()")
+        i.large.icon.dropbox
+        | dropbox
+      md-button.md-warn(ng-repeat="file in files",ng-click="trigger(file)") {{file.name}}

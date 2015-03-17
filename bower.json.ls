@@ -14,6 +14,7 @@ dependencies:
   "angular-scenario": angular-version
   "angular-material": "^0.8.3"
   "angular-ui-router": "0.2.11"
+  "angular-pdf": 'git://github.com/clkao/angularjs-pdf#page-fit'
 
 overrides:
   "angular":

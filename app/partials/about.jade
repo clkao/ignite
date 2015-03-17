@@ -1,5 +1,10 @@
 md-content.md-padding(ng-show="!hasPDF")
-  h2 Open one or more pdf files from your dropbox
+  h2 Open one or more pdf files from your dropbox, and play with auto-advancing.
+
+  .ui.divider
+  .ui.warning.message built for the #[a(href="http://ocftw.kktix.cc/events/ignite-od") Ignite Open Data] event
+
+  a(href="https://github.com/clkao/ignite") github
 
 md-progress-linear.ignite.md-warn(ng-if="hasPDF",md-mode="buffer",value="{{pageProgress}}",md-buffer-value="{{slideProgress}}",style="z-index: 10")
 ng-pdf(template-url="app/partials/viewer.html",ng-if="hasPDF",ng-style="{position: 'fixed', top: 0, left:0, right: 0, bottom: 0, 'z-index': 9}",scale="page-fit",ng-controller="PDFPlayerCtrl")

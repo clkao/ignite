@@ -10,18 +10,18 @@ html(ng-app='App')
 
     title(ng-bind-template='{{$state.current.title || "seed"}}')
     link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.4/semantic.min.css")
-    link(rel='stylesheet', href='/css/app.css')
-    link(rel="shotcut icon",href="/img/favicon.ico")
+    link(rel='stylesheet', href='#{base}/css/app.css')
+    link(rel="shotcut icon",href="#{base}/img/favicon.ico")
     //if lte IE 7
       script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js')
     //if lte IE 8
       script(src='//html5shiv.googlecode.com/svn/trunk/html5.js')
-    script(src='/js/vendor.js')
+    script(src='#{base}/js/vendor.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.4/semantic.min.js')
     script(type="text/javascript",src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key=
 "eqlo2dya9mzi531")
-    script(src='/js/app.templates.js')
-    script(src='/js/app.js')
+    script(src='#{base}/js/app.templates.js')
+    script(src='#{base}/js/app.js')
   body(ng-controller='AppCtrl',ng-cloak,layout="row",layout-fill)
     include partials/nav.jade
     md-content#container.container(layout="row",layout-fill,ui-view)

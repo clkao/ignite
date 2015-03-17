@@ -105,12 +105,14 @@ gulp.task 'template' <[index]> ->
 
 gulp.task 'index' ->
   pretty = 'yes' if gutil.env.env isnt \production
+  base = if gutil.env.env is \production => '/ignite' else ''
 
   gulp.src ['app/*.jade']
     .pipe gulp-jade do
       pretty: pretty
       locals:
         googleAnalytics: google-analytics
+        base: base
     .pipe gulp.dest '_public'
     .pipe gulp-if dev, livereload!
 

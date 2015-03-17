@@ -105,7 +105,8 @@ gulp.task 'template' <[index]> ->
 
 gulp.task 'index' ->
   pretty = 'yes' if gutil.env.env isnt \production
-  base = if gutil.env.env is \production => '/ignite' else ''
+  base = ''
+  #base = if gutil.env.env is \production => '/ignite' else ''
 
   gulp.src ['app/*.jade']
     .pipe gulp-jade do
@@ -171,6 +172,8 @@ gulp.task 'css' <[bower]> ->
 gulp.task 'assets' ->
   gulp.src 'app/assets/**'
     .pipe gulp.dest '_public'
+  gulp.src 'bower_components/pdfjs-dist/build/pdf.worker.js'
+    .pipe gulp.dest '_public/pdf.worker.js'
 
 export gulp-deps = do
   "gulp": '^3.8.0'

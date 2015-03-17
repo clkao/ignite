@@ -173,7 +173,7 @@ gulp.task 'assets' ->
   gulp.src 'app/assets/**'
     .pipe gulp.dest '_public'
   gulp.src 'bower_components/pdfjs-dist/build/pdf.worker.js'
-    .pipe gulp.dest '_public/pdf.worker.js'
+    .pipe gulp.dest '_public'
 
 export gulp-deps = do
   "gulp": '^3.8.0'

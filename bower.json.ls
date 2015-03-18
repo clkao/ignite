@@ -10,6 +10,7 @@ dependencies:
   "commonjs-require-definition": "~0.1.2"
   jquery: "~2.0.3"
   angular: angular-version
+  "angular-animate": angular-version
   "angular-mocks": angular-version
   "angular-scenario": angular-version
   "angular-material": "^0.8.3"

@@ -1,7 +1,7 @@
 # Declare app level module which depends on filters, and services
 PDFJS.workerSrc = '/pdf.worker.js'
 
-angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-model filereader ngStorage ui.sortable]>
+angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-model filereader ngStorage ui.sortable ngAnimate]>
 
 .config <[$stateProvider $urlRouterProvider $locationProvider]> ++ ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $stateProvider
@@ -38,7 +38,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     $mdSidenav 'left' .open!
 
 .controller About: <[$rootScope $http $scope $mdSidenav $localStorage]> ++ ($rootScope, $http, $scope, $mdSidenav, $localStorage) ->
-    $scope.files = $localStorage.files || []
+    $rootScope.files = $scope.files = $localStorage.files || []
     $rootScope.activeTab = 'about'
     $rootScope.pdfUrl = '/'
     $scope.toggleLeft = -> $mdSidenav('left').toggle!
@@ -103,7 +103,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.dropbox = -> Dropbox.choose do
     success: (files) ->
       console.log JSON.stringify files
-      $scope.$apply -> $localStorage.files = $scope.files = files
+      $scope.$apply -> $localStorage.files = $rootScope.files = $scope.files = files
     link-type: 'direct'
     multiselect: true
     extensions: ['.pdf']
@@ -111,6 +111,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.$watch 'localFiles' (files) -> if files?length
     $localStorage.files = []
     $scope.files = [file for file in files]
+    $rootScope.files = $scope.files
 
   $scope.reset = ->
     $rootScope.hasPDF = false

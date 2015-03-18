@@ -48,7 +48,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     $scope.$parent.ready = true
     #start!
   $scope.start = ->
-    $scope.$parent.started = true
+    $rootScope.started = true
     $rootScope.pageProgress = 0
     $interval (->
       $('.md-bar2').css transition: "all #{per-page / 1000}s linear"

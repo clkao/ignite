@@ -1,13 +1,16 @@
 md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked-open="!hasPDF")
   md-toolbar.md-theme-indigo
     h1.md-toolbar-tools Ignite Talks
-    md-content.md-padding(ng-controller='LeftCtrl')
-      md-button.md-primary(ng-click='close()', hide-gt-md='') Close
-      md-button.md-primary(ng-click="dropbox()")
-        i.large.icon.dropbox
-        | dropbox
-      div
-        i.large.icon.file
-        input(type="file",ng-files-model="localFiles",multiple)
+  md-content.md-padding(ng-controller='LeftCtrl')
+    md-button.md-primary(ng-click='close()', hide-gt-md='') Close
+    md-button.md-primary(ng-click="dropbox()")
+      i.large.icon.dropbox
+      | dropbox
+    md-button.md-primary(ng-files-model="localFiles")
+      i.large.icon.file
+      label
+        input(type="file",multiple,accept="application/pdf",style="display: none")
         | local files
-      md-button.md-warn(ng-repeat="file in files",ng-click="trigger(file)") {{file.name}}
+    ul(style="list-style: none")
+      li(ng-repeat="file in files")
+        md-button.md-warn(ng-click="trigger(file)") {{file.name}}

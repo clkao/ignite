@@ -144,7 +144,8 @@ gulp.task 'js:app' ->
     .pipe gulp-if dev, livereload!
 
 gulp.task 'js:vendor' <[bower]> ->
-  bower = gulp.src main-bower-files!
+  # XXX: somehow angular-filereader doesn't get included
+  bower = gulp.src main-bower-files! ++ './bower_components/angular-filereader/angular-filereader.js'
     .pipe gulp-filter -> it.path is /\.js$/
 
   s = streamqueue { +objectMode }

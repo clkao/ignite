@@ -15,6 +15,8 @@ dependencies:
   "angular-material": "^0.8.3"
   "angular-ui-router": "0.2.11"
   "angular-pdf": 'git://github.com/clkao/angularjs-pdf#page-fit'
+  "angular-files-model": "^0.1.1"
+  "angular-filereader": 'git://github.com/genu/angular-filereader#patch-1'
 
 overrides:
   "angular":
@@ -23,6 +25,8 @@ overrides:
     main: "README.md"
   "angular-scenario":
     main: "README.md"
+  "angular-filereader"
+    main: "angular-filereader.js"
 
 resolutions:
   angular: angular-version

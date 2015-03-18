@@ -6,4 +6,8 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked
       md-button.md-primary(ng-click="dropbox()")
         i.large.icon.dropbox
         | dropbox
+      div
+        i.large.icon.file
+        input(type="file",ng-files-model="localFiles",multiple)
+        | local files
       md-button.md-warn(ng-repeat="file in files",ng-click="trigger(file)") {{file.name}}

@@ -34,7 +34,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     else
       ''
 
-.controller About: <[$rootScope $http $scope $mdSidenav $interval]> ++ ($rootScope, $http, $scope, $mdSidenav, $interval) ->
+.controller About: <[$rootScope $http $scope $mdSidenav $interval $localStorage]> ++ ($rootScope, $http, $scope, $mdSidenav, $interval, $localStorage) ->
+    $scope.$storage = $localStorage
     $rootScope.activeTab = 'about'
     $rootScope.pdfUrl = '/'
     $scope.toggleLeft = -> $mdSidenav('left').toggle!

@@ -1,4 +1,4 @@
-md-content#about.md-padding(ng-show="!hasPDF")
+md-content#about.md-padding(ng-show="!$storage.files.length",layout-fill)
   h2 Open one or more pdf files from your dropbox, and play with auto-advancing.
 
   p files are processed locally, nothing is sent to any server.

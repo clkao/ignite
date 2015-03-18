@@ -58,8 +58,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     stop = $interval (->
       $scope.page += 1
       if $scope.page > $scope.pageCount
-        $rootScope.hasPDF = false
         $rootScope.started = false
+        $scope.$parent.ready = false
         return $interval.cancel stop
       $scope.goNext!
       $rootScope.slideProgress += 100 / $scope.pageCount
@@ -70,6 +70,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
         $rootScope.pageProgress = 100
       ), 100, 1
     ), per-page, $scope.pageCount
+  $scope.end = ->
+    $rootScope.hasPDF = false
 
 .controller LeftCtrl: <[$rootScope $scope $timeout $interval $mdSidenav $log FileReader $localStorage]> ++ ($rootScope, $scope, $timeout, $interval, $mdSidenav, $log, FileReader, $localStorage) ->
   # sample dropbox response:

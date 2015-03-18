@@ -1,20 +1,10 @@
-angular-livescript-seed
-=======================
+Ignite Player
+=============
 
-Ultra-modern angular-livescript seed with:
-* LiveScript
-* gulp
-* bower
-* semantic-ui
-* stylus
-* angular-ui-router
-* protractor
+Running an ignite event?  This tool helps you play the slides during the event.
 
-This resembles pretty much the [brunch](http://brunch.io) standard build process with gulp, with minor tweaks for angular:
-* vendor javascript files from bower and vendor/ directory are concatenated into vendor.js
-* js under app/ are concatenated into app.js
-* partial templates written in jade are turned into angular module as 'app.templates' and concatenated into app.templates.js
-* css files are concatenated into app.css
+It works with files on local disk or on dropbox.  A progress bar will be displayed
+on top, for both current slide timer and overall deck prgoress.
 
 # Usage
 

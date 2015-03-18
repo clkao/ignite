@@ -87,8 +87,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.files = $localStorage.files || []
   $scope.trigger = (file) ->
     $scope.close!
-    $rootScope.hasPDF = false
-    delete $rootScope.pdfUrl
+    $scope.reset!
     <- $timeout _, 200ms
     console.log it
     if 'File' is typeof! file

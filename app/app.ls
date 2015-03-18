@@ -1,7 +1,7 @@
 # Declare app level module which depends on filters, and services
 PDFJS.workerSrc = '/pdf.worker.js'
 
-angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-model filereader]>
+angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-model filereader ngStorage]>
 
 .config <[$stateProvider $urlRouterProvider $locationProvider]> ++ ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $stateProvider
@@ -65,10 +65,11 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
       ), 100, 1
     ), per-page, $scope.pageCount-1
 
-.controller LeftCtrl: <[$rootScope $scope $timeout $interval $mdSidenav $log FileReader]> ++ ($rootScope, $scope, $timeout, $interval, $mdSidenav, $log, FileReader) ->
+.controller LeftCtrl: <[$rootScope $scope $timeout $interval $mdSidenav $log FileReader $localStorage]> ++ ($rootScope, $scope, $timeout, $interval, $mdSidenav, $log, FileReader, $localStorage) ->
   # sample dropbox response:
   # $scope.files = [{"bytes":2772798,"link":"https://dl.dropboxusercontent.com/1/view/2lv9585lhj8hnv0/ignite-od/au_Sandstorm-and-OpenDocument.pdf","name":"au_Sandstorm-and-OpenDocument.pdf","icon":"https://www.dropbox.com/static/images/icons64/page_white_acrobat.png"},{"bytes":2270164,"link":"https://dl.dropboxusercontent.com/1/view/nmoi7kfx3r2fynj/ignite-od/ianmakgill-what-happens-when-you-use-open-data-a-story-from-the-uk.pdf","name":"ianmakgill-what-happens-when-you-use-open-data-a-story-from-the-uk.pdf","icon":"https://www.dropbox.com/static/images/icons64/page_white_acrobat.png"}]
-  $scope.files = []
+  $scope.$storage = $localStorage
+  $scope.$storage.files ||= []
   $scope.trigger = ->
     console.log it
     if 'File' is typeof! it
@@ -84,13 +85,13 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.dropbox = -> Dropbox.choose do
     success: (files) ->
       console.log JSON.stringify files
-      $scope.$apply -> $scope.files = files
+      $scope.$apply -> $scope.$storage.files = files
     link-type: 'direct'
     multiselect: true
     extensions: ['.pdf']
 
   $scope.$watch 'localFiles' (files) -> if files?length
-    $scope.files = [file for file in files]
+    $scope.$storage.files = [file for file in files]
 
   $scope.close = ->
     $mdSidenav 'left' .close!

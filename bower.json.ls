@@ -16,7 +16,7 @@ dependencies:
   "angular-ui-router": "0.2.11"
   "angular-pdf": 'git://github.com/clkao/angularjs-pdf#page-fit'
   "angular-files-model": "^0.1.1"
-  "angular-filereader": 'git://github.com/clkao/angular-filereader'
+  "angular-filereader": 'git://github.com/clkao/angular-filereader#master'
   "ngstorage": "~0.3.0"
 
 overrides:

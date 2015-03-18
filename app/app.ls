@@ -78,6 +78,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     ), per-page, $scope.pageCount
   $scope.end = ->
     $rootScope.hasPDF = false
+  $scope.$watch "page > pageCount" -> if it
+    $scope.end!
 
 .controller LeftCtrl: <[$rootScope $scope $timeout $interval $mdSidenav $log FileReader $localStorage]> ++ ($rootScope, $scope, $timeout, $interval, $mdSidenav, $log, FileReader, $localStorage) ->
   # sample dropbox response:

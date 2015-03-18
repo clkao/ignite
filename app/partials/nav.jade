@@ -14,3 +14,4 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked
     ul(style="list-style: none")
       li(ng-repeat="file in $storage.files")
         md-button.md-warn(ng-click="trigger(file)") {{file.name}}
+    md-button.md-primary(ng-click='reset()') RESET

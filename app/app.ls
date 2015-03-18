@@ -34,18 +34,18 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     else
       ''
 
-.controller About: <[$rootScope $http $scope $mdSidenav $interval $localStorage]> ++ ($rootScope, $http, $scope, $mdSidenav, $interval, $localStorage) ->
+.controller About: <[$rootScope $http $scope $mdSidenav $localStorage]> ++ ($rootScope, $http, $scope, $mdSidenav, $localStorage) ->
     $scope.$storage = $localStorage
     $rootScope.activeTab = 'about'
     $rootScope.pdfUrl = '/'
     $scope.toggleLeft = -> $mdSidenav('left').toggle!
-    $rootScope.pageProgress = 0
-    $rootScope.slideProgress = 5
 
 .controller PDFPlayerCtrl: <[$rootScope $scope $interval]> ++ ($rootScope, $scope, $interval) ->
   per-page = 15000
   $scope.$parent.ready = false
   $rootScope.started = false
+  $rootScope.pageProgress = 0
+  $rootScope.slideProgress = 5
   $scope.$parent.onLoad = ->
     # ready
     $scope.$parent.ready = true
@@ -83,8 +83,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.$storage.files ||= []
   $scope.trigger = (file) ->
     $rootScope.hasPDF = false
-    $rootScope.hasPDF = false
-    <- $timeout _, 100s
+    delete $rootScope.pdfUrl
+    <- $timeout _, 1000ms
     console.log it
     if 'File' is typeof! file
       FileReader.readAsDataURL(file, $scope)
@@ -107,8 +107,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.$watch 'localFiles' (files) -> if files?length
     $scope.$storage.files = [file for file in files]
 
+  $scope.reset = ->
+    $rootScope.hasPDF = false
+
   $scope.close = ->
     $mdSidenav 'left' .close!
-    .then ->
-      $log.debug "close LEFT is done"
-    $rootScope.activeTab = 'about'

@@ -22,7 +22,7 @@ html(ng-app='App')
 "eqlo2dya9mzi531")
     script(src='#{base}/js/app.templates.js')
     script(src='#{base}/js/app.js')
-  body(ng-controller='AppCtrl',ng-cloak,layout="row",layout-fill)
+  body.ignite-od(ng-controller='AppCtrl',ng-cloak,layout="row",layout-fill)
     include partials/nav.jade
     md-content#container.container(layout="row",layout-fill,ui-view)
   - if (typeof(googleAnalytics) !== 'undefined')

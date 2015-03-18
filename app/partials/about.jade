@@ -1,4 +1,4 @@
-md-content.md-padding(ng-show="!hasPDF")
+md-content#about.md-padding(ng-show="!hasPDF")
   h2 Open one or more pdf files from your dropbox, and play with auto-advancing.
 
   p files are processed locally, nothing is sent to any server.
@@ -8,4 +8,4 @@ md-content.md-padding(ng-show="!hasPDF")
   a(href="https://github.com/clkao/ignite") github
 
 md-progress-linear.ignite.md-warn(ng-show="started",ng-if="hasPDF",md-mode="buffer",value="{{pageProgress}}",md-buffer-value="{{slideProgress}}",style="z-index: 10")
-ng-pdf(template-url="app/partials/viewer.html",ng-if="hasPDF",ng-style="{position: 'fixed', top: 0, left:0, right: 0, bottom: 0, 'z-index': 9}",scale="page-fit",ng-controller="PDFPlayerCtrl")
+ng-pdf(template-url="app/partials/viewer.html",ng-if="hasPDF",ng-class="{ready: ready}",ng-style="{position: 'fixed', top: 0, left:0, right: 0, bottom: 0, 'z-index': 9}",scale="page-fit",ng-controller="PDFPlayerCtrl")

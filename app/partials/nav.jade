@@ -11,7 +11,11 @@ md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked
         i.large.icon.file
         input(type="file",multiple,accept="application/pdf",style="display: none")
         | local files
-    ul(style="list-style: none")
-      li(ng-repeat="file in $storage.files")
-        md-button.md-warn(ng-click="trigger(file)") {{file.name}}
+    md-list(role="list",ui-sortable,ng-model="$storage.files")
+      md-item(role="listitem",ng-repeat="file in $storage.files")
+        md-item-content
+          .md-tile-left
+            img.face(ng-src="{{file.icon}}")
+          .md-tile-content(ng-click="trigger(file)")
+            h3 {{file.name}}
     md-button.md-primary(ng-click='reset()') RESET

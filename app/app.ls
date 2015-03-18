@@ -1,7 +1,7 @@
 # Declare app level module which depends on filters, and services
 PDFJS.workerSrc = '/pdf.worker.js'
 
-angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-model filereader ngStorage]>
+angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-model filereader ngStorage ui.sortable]>
 
 .config <[$stateProvider $urlRouterProvider $locationProvider]> ++ ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $stateProvider

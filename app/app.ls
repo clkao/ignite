@@ -38,7 +38,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
     $mdSidenav 'left' .open!
 
 .controller About: <[$rootScope $http $scope $mdSidenav $localStorage]> ++ ($rootScope, $http, $scope, $mdSidenav, $localStorage) ->
-    $scope.$storage = $localStorage
+    $scope.files = $localStorage.files || []
     $rootScope.activeTab = 'about'
     $rootScope.pdfUrl = '/'
     $scope.toggleLeft = -> $mdSidenav('left').toggle!
@@ -84,8 +84,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
 .controller LeftCtrl: <[$rootScope $scope $timeout $interval $mdSidenav $log FileReader $localStorage]> ++ ($rootScope, $scope, $timeout, $interval, $mdSidenav, $log, FileReader, $localStorage) ->
   # sample dropbox response:
   # $scope.files = [{"bytes":2772798,"link":"https://dl.dropboxusercontent.com/1/view/2lv9585lhj8hnv0/ignite-od/au_Sandstorm-and-OpenDocument.pdf","name":"au_Sandstorm-and-OpenDocument.pdf","icon":"https://www.dropbox.com/static/images/icons64/page_white_acrobat.png"},{"bytes":2270164,"link":"https://dl.dropboxusercontent.com/1/view/nmoi7kfx3r2fynj/ignite-od/ianmakgill-what-happens-when-you-use-open-data-a-story-from-the-uk.pdf","name":"ianmakgill-what-happens-when-you-use-open-data-a-story-from-the-uk.pdf","icon":"https://www.dropbox.com/static/images/icons64/page_white_acrobat.png"}]
-  $scope.$storage = $localStorage
-  $scope.$storage.files ||= []
+  $scope.files = $localStorage.files || []
   $scope.trigger = (file) ->
     $scope.close!
     $rootScope.hasPDF = false
@@ -105,13 +104,14 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.dropbox = -> Dropbox.choose do
     success: (files) ->
       console.log JSON.stringify files
-      $scope.$apply -> $scope.$storage.files = files
+      $scope.$apply -> $localStorage.files = $scope.files = files
     link-type: 'direct'
     multiselect: true
     extensions: ['.pdf']
 
   $scope.$watch 'localFiles' (files) -> if files?length
-    $scope.$storage.files = [file for file in files]
+    $localStorage.files = []
+    $scope.files = [file for file in files]
 
   $scope.reset = ->
     $rootScope.hasPDF = false

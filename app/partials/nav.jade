@@ -1,6 +1,6 @@
 div#sidehover(ng-mouseover="hover()")
 div(ng-controller="LeftCtrl")
-  md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked-open="!$storage.files")
+  md-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked-open="!files")
     md-toolbar.md-theme-indigo
       h1.md-toolbar-tools Ignite Talks
     md-content.md-padding
@@ -13,8 +13,8 @@ div(ng-controller="LeftCtrl")
           i.large.icon.file
           input(type="file",multiple,accept="application/pdf",style="display: none")
           | local files
-      md-list(role="list",ui-sortable,ng-model="$storage.files")
-        md-item(role="listitem",ng-repeat="file in $storage.files")
+      md-list(role="list",ui-sortable,ng-model="files")
+        md-item(role="listitem",ng-repeat="file in files")
           md-item-content
             .md-tile-left
               img.face(ng-src="{{file.icon}}")

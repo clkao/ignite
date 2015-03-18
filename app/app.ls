@@ -44,6 +44,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
 
 .controller PDFPlayerCtrl: <[$rootScope $scope $interval]> ++ ($rootScope, $scope, $interval) ->
   per-page = 15000
+  $scope.$parent.ready = false
+  $rootScope.started = false
   $scope.$parent.onLoad = ->
     # ready
     $scope.$parent.ready = true
@@ -71,16 +73,19 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   # $scope.files = [{"bytes":2772798,"link":"https://dl.dropboxusercontent.com/1/view/2lv9585lhj8hnv0/ignite-od/au_Sandstorm-and-OpenDocument.pdf","name":"au_Sandstorm-and-OpenDocument.pdf","icon":"https://www.dropbox.com/static/images/icons64/page_white_acrobat.png"},{"bytes":2270164,"link":"https://dl.dropboxusercontent.com/1/view/nmoi7kfx3r2fynj/ignite-od/ianmakgill-what-happens-when-you-use-open-data-a-story-from-the-uk.pdf","name":"ianmakgill-what-happens-when-you-use-open-data-a-story-from-the-uk.pdf","icon":"https://www.dropbox.com/static/images/icons64/page_white_acrobat.png"}]
   $scope.$storage = $localStorage
   $scope.$storage.files ||= []
-  $scope.trigger = ->
+  $scope.trigger = (file) ->
+    $rootScope.hasPDF = false
+    $rootScope.hasPDF = false
+    <- $timeout _, 100s
     console.log it
-    if 'File' is typeof! it
-      FileReader.readAsDataURL(it, $scope)
+    if 'File' is typeof! file
+      FileReader.readAsDataURL(file, $scope)
       .then (resp) ->
         $rootScope.pdfUrl = resp
         $rootScope.hasPDF = true
       return
 
-    $rootScope.pdfUrl = it.link
+    $rootScope.pdfUrl = file.link
     $rootScope.hasPDF = true
 
   $scope.dropbox = -> Dropbox.choose do

@@ -23,7 +23,7 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $rootScope.$on '$stateChangeSuccess' (e, {name}) ->
     window?ga? 'send' 'pageview' page: $location.$$path, title: name
 
-.controller AppCtrl: <[$scope $location $rootScope $sce]> ++ (s, $location, $rootScope, $sce) ->
+.controller AppCtrl: <[$scope $location $rootScope $sce $mdSidenav]> ++ (s, $location, $rootScope, $sce, $mdSidenav) ->
   s <<< {$location}
   s.$watch '$location.path()' (activeNavId or '/') ->
     s <<< {activeNavId}
@@ -33,6 +33,9 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
       'active'
     else
       ''
+
+  s.hover = ->
+    $mdSidenav 'left' .open!
 
 .controller About: <[$rootScope $http $scope $mdSidenav $localStorage]> ++ ($rootScope, $http, $scope, $mdSidenav, $localStorage) ->
     $scope.$storage = $localStorage
@@ -58,12 +61,12 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
       $('.md-bar2').css transition: "all #{per-page / 1000}s linear"
       $rootScope.pageProgress = 100
     ), 100, 1
-    stop = $interval (->
+    $rootScope.stop = $interval (->
       $scope.page += 1
       if $scope.page > $scope.pageCount
         $rootScope.started = false
         $scope.$parent.ready = false
-        return $interval.cancel stop
+        return $interval.cancel $rootScope.stop
       $scope.goNext!
       $rootScope.slideProgress += 100 / $scope.pageCount
       $('.md-bar2').css transition: ''
@@ -82,9 +85,10 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
   $scope.$storage = $localStorage
   $scope.$storage.files ||= []
   $scope.trigger = (file) ->
+    $scope.close!
     $rootScope.hasPDF = false
     delete $rootScope.pdfUrl
-    <- $timeout _, 1000ms
+    <- $timeout _, 200ms
     console.log it
     if 'File' is typeof! file
       FileReader.readAsDataURL(file, $scope)
@@ -109,6 +113,8 @@ angular.module "App" <[app.templates ngMaterial ui.router pdf angular-files-mode
 
   $scope.reset = ->
     $rootScope.hasPDF = false
+    if $rootScope.stop
+      $interval.cancel $rootScope.stop
 
   $scope.close = ->
     $mdSidenav 'left' .close!

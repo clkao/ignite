@@ -5,7 +5,8 @@ md-content#about.md-padding(ng-show="!files.length && !hasPDF",layout-fill)
   .ui.divider
   .ui.warning.message built for the #[a(href="http://ocftw.kktix.cc/events/ignite-od") Ignite Open Data] event
 
-  a(href="https://github.com/clkao/ignite") github
+  .ui.basic.center.aligned.segment
+    a(href="https://github.com/clkao/ignite") github
 
 md-progress-linear.ignite.md-warn(ng-show="started",ng-if="hasPDF",md-mode="buffer",value="{{pageProgress}}",md-buffer-value="{{slideProgress}}",style="z-index: 10")
 ng-pdf.animate-if(template-url="app/partials/viewer.html",ng-if="hasPDF",ng-class="{ready: ready}",ng-style="{position: 'fixed', top: 0, left:0, right: 0, bottom: 0, 'z-index': 9}",scale="page-fit",ng-controller="PDFPlayerCtrl")
